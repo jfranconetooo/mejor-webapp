@@ -21,6 +21,10 @@ export class ConsultingService {
      return this.http
     .get<DateReponse>(AppSettings.API_ENDPOINT + '/consulting/dates-enabled');
   }
+  
+  getUnAvailableDates():Observable<string[]>{
+    return this.http.get<string[]>(AppSettings.API_ENDPOINT + '/consulting/dates-unavailable');
+  }
 
  getMyConsultings(): Observable<Consulting[]>{
   let user = this.securityService.getAuthenticatedUser();

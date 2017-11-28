@@ -1,29 +1,44 @@
 <h1 class="page-header">Consulting</h1>
-<div>
-    <form  #form="ngForm" (ngSubmit)="onSubmit(form)">
-        <div class="row">
-            <div class="form-group" >
-                <div class="col-md-9">
-                    <label class="col-lg-3 control-label" >Date of the consulting:</label>
-                    <div class="form-group col-lg-7 control-label">
-                        <div id="scheduleDate" class="input-group"   a2e-datetimepicker
-                        [date]="date"
-                        (onChange)="dateChange($event)"
-                        [options]="a2eOptions">
-                        <input class="form-control"/>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                        </div>
+<div class="row">
+    <div [ngClass]="{'col-lg-12': unavailableDates.length === 0, 'col-lg-6':  unavailableDates.length !== 0}">
+            <form  #form="ngForm" (ngSubmit)="onSubmit(form)">
+                    <div class="row">
+                        <div class="form-group" >
+                            <div class="col-lg-9">
+                                <label class="col-lg-2 control-label" style="margin-top:8px">Date: </label>
+                                <div class="form-group col-lg-8 control-label">
+                                    <div id="scheduleDate" class="input-group"   a2e-datetimepicker
+                                    [date]="date"
+                                    (onChange)="dateChange($event)"
+                                    [options]="a2eOptions">
+                                    <input class="form-control"/>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 form-group">
+                                        <button class="btn btn-primary"  data-size="xs" type="submit">Schedule</button>
+                                      </div>
+                            </div>
+                      </div>
                     </div>
-                    <div class="col-md-2">
-                            <button class="btn btn-primary"  data-size="xs" type="submit">Schedule</button>
-                          </div>
-                </div>
-          </div>
-        </div>
-  </form>
+              </form>
+    </div>
+    <div [ngClass]="{'col-lg-6':  unavailableDates.length !== 0}">
+            <section *ngIf="unavailableDates && unavailableDates.length !== 0">
+                    <h4 class="unavailable-title">Unavailable Dates</h4>
+                    <div>
+                        <ul class="list-group">
+                            <li class="unavailable-date-text list-group-item" *ngFor="let date of unavailableDates">
+                                {{date | amDateFormat:'L LT'}}
+                            </li>
+                        </ul>
+                    </div>    
+                </section>
+    </div>
 </div>
-<hr>
+
 <h4>My Consultigs</h4>
+<hr>
 <div *ngIf="myConsultings && myConsultings.length !== 0" >
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let consulting of myConsultings">

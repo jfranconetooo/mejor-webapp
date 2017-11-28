@@ -19,6 +19,7 @@ export class ConsultingComponent implements OnInit {
   date: moment.Moment;
   a2eOptions: any;
   myConsultings: Consulting[]=[];
+  unavailableDates: string[] = [];
   consulting: Consulting = new Consulting();
 
   isSaving: boolean = false;
@@ -34,18 +35,43 @@ export class ConsultingComponent implements OnInit {
                         minDate: '2017-12-02T11:00:00.000Z'
                       };
    }
-   
+
+
+   ngOnInit() {
+    this.loadMyConsultings();
+    this.loadEnabledDates();
+    this.loadUnavailableDates();
+  }
+
+ 
    onSubmit(form){
     if(form.valid){
       this.isSaving = true;
       this.consulting.date = moment(this.date).toDate();
       this.consultingService.save(this.consulting).subscribe(data => {
         this.loadMyConsultings();
+        this.loadUnavailableDates();
         this.isSaving=false;
       }, error => this.isSaving=false, ()=> {
         this.isSaving=false;
       });
     }
+   }
+
+   loadEnabledDates(){
+    this.consultingService.getEnabledDates().
+    subscribe(data => 
+      {
+        //Set dates when started because of version of component is whit bug
+        //$('#scheduleDate').data("DateTimePicker").enabledDates(data.dates_enableds);
+        $('#scheduleDate').data("DateTimePicker").enabledHours(data.hours_enableds);
+      });
+   }
+
+
+   loadUnavailableDates(){
+    this.consultingService.getUnAvailableDates().
+    subscribe(data => this.unavailableDates = data);
    }
 
    delete(consulting:Consulting){
@@ -56,27 +82,20 @@ export class ConsultingComponent implements OnInit {
         `)
     .open();
 
-
-
     dialogRef.result
     .then( (result) => {
-      this.consultingService.delete(consulting._id).subscribe(data =>  this.loadMyConsultings());
+      this.consultingService.delete(consulting._id).subscribe(data =>  
+        {
+          this.loadUnavailableDates();
+          this.loadMyConsultings();
+        });
     });     
    }
 
   dateChange(date) {
     this.date = date;
   }
-  ngOnInit() {
-    this.loadMyConsultings();
-    this.consultingService.getEnabledDates().
-    subscribe(data => 
-      {
-        //Set dates when started because of version of component is whit bug
-        //$('#scheduleDate').data("DateTimePicker").enabledDates(data.dates_enableds);
-        $('#scheduleDate').data("DateTimePicker").enabledHours(data.hours_enableds);
-      });
-  }
+
 
   loadMyConsultings(){
     this.consultingService.getMyConsultings().subscribe(consultings => {

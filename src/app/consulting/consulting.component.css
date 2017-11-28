@@ -1,3 +1,11 @@
 .icon-trash {
     float: right;
 }
+
+.unavailable-title {
+    color: rgb(170, 15, 15);
+}
+
+.unavailable-date-text {
+    text-decoration-line: line-through;
+}
