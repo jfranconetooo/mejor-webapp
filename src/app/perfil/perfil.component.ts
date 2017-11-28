@@ -31,6 +31,7 @@ export class PerfilComponent implements OnInit {
 
   onSubmit(form){
     if(form.valid) {
+      console.log(this.user);
       this.userService.update(this.user).subscribe(data => {
         this.user = data;
         this.securityService.setAuthenticatedUser(this.user);

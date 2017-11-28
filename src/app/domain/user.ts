@@ -19,11 +19,11 @@ export class User {
                 username: this.username,
                 profile_picture: this.profile_picture,
                 full_name: this.full_name,
-                birth_date: this.full_name = null,
-                city: this.city = null,
-                education: this.education = null,
-                occupation: this.occupation = null,
-                email: this.email = null
+                birth_date: this.full_name,
+                city: this.city,
+                education: this.education,
+                occupation: this.occupation,
+                email: this.email
             }
         }
 
