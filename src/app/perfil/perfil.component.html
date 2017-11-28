@@ -1,0 +1,65 @@
+
+  <h1 class="page-header">Profile</h1>
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="text-center">
+        <img [src]="user.profile_picture" class="avatar img-circle img-thumbnail" alt="avatar">
+        <h6 class="my-2">@{{user.username}}</h6>
+      </div>
+    </div>
+    <!-- edit form column -->
+    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+      <h3>Personal info</h3>
+      <form class="form-horizontal" #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Full name:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" name="full-name" [(ngModel)]="user.full_name" required #fullname="ngModel">
+            <div class="help-block-div" *ngIf="!fullname.valid && form.submitted">
+                <div class="has-error">The full name is required</div>   
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Email:</label>
+          <div class="col-lg-8">
+            <input class="form-control" autocomplete="false" type="email" name="email" [(ngModel)]="user.email" email pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" #email="ngModel">
+            <div class="help-block-div" *ngIf="!email.valid && form.submitted">
+              <div class="has-error">Email invalid</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">City:</label>
+          <div class="col-lg-8">
+            <input class="form-control"  type="text" name="city" [(ngModel)]="user.city">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Education:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" name="education" [(ngModel)]="user.education">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Ocupation:</label>
+          <div class="col-lg-8">
+            <div class="ui-select">
+              <select id="user_time_zone" class="form-control" name="ocupation" [(ngModel)]="user.ocupation">
+                <option value="Student">Student</option>
+                <option value="Software developer">Software developer</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <button class="btn btn-primary" [disabled]="form.submitted && form.invalid" type="submit">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

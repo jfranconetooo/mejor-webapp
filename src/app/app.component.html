@@ -1,0 +1,5 @@
+<app-top-nav-bar *ngIf="router.url !== '/login'"></app-top-nav-bar>
+<main role="main" class="container my-4">
+    <router-outlet></router-outlet>
+</main>
+<app-footer *ngIf="router.url !== '/login'"></app-footer>

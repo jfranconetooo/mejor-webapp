@@ -1,0 +1,38 @@
+<h1 class="page-header">Consulting</h1>
+<div>
+    <form  #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="row">
+            <div class="form-group" >
+                <div class="col-md-9">
+                    <label class="col-lg-3 control-label" >Date of the consulting:</label>
+                    <div class="form-group col-lg-7 control-label">
+                        <div id="scheduleDate" class="input-group"   a2e-datetimepicker
+                        [date]="date"
+                        (onChange)="dateChange($event)"
+                        [options]="a2eOptions">
+                        <input class="form-control"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                            <button class="btn btn-primary"  data-size="xs" type="submit">Schedule</button>
+                          </div>
+                </div>
+          </div>
+        </div>
+  </form>
+</div>
+<hr>
+<h4>My Consultigs</h4>
+<div *ngIf="myConsultings && myConsultings.length !== 0" >
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let consulting of myConsultings">
+            {{consulting.date | amDateFormat:'L LT'}}
+            <a (click)="delete(consulting)" class="icon-trash"><i class="glyphicon glyphicon-trash"></i></a>
+        </li>
+    </ul>
+</div>
+<div *ngIf="myConsultings && myConsultings.length === 0">
+    There are not consultigs schedule
+</div>
+  

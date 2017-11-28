@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*!
+ * Start Bootstrap - Heroic Features (https://startbootstrap.com/template-overviews/heroic-features)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-heroic-features/blob/master/LICENSE)
+ */
+ html {
+   height: 100%;
+ }
+
+body {
+  padding-top: 54px;
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+  }
+}
+
+.card {
+  height: 100%;
+}
+
+.has-error{
+  color: rgb(214, 38, 38)
+}
+
+a {
+  cursor: pointer; 
+}
