@@ -1,4 +1,4 @@
-# MejorWebapp
+# Mejor-WebApp
 
 This project need [Angular CLI](https://github.com/angular/angular-cli) version 1.5.2.
 
